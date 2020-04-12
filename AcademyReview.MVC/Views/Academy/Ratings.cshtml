@@ -1,0 +1,81 @@
+﻿@model IEnumerable<AcademyReview.Models.RatingModels.Academy.AcademyRatingListItem>
+
+@{
+    ViewBag.Title = "Ratings";
+}
+
+<h2>Academy Ratings</h2>
+
+<p>
+    @*@Html.ActionLink("Add Rating", "Rate", new { id })*@
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.RatingId)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.IsUserOwned)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.AcademyId)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.AcademyName)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.HiddenFor(modelItem => item.RatingId)
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.RatingId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            @Html.HiddenFor(modelItem => item.IsUserOwned)
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsUserOwned)
+                </td>*@
+            @Html.HiddenFor(modelItem => item.UserId)
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>*@
+
+            @Html.HiddenFor(modelItem => item.AcademyId)
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.AcademyId)
+                </td>*@
+
+            @Html.HiddenFor(modelItem => item.AcademyName)
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.AcademyName)
+
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

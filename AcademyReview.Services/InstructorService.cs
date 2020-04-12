@@ -17,16 +17,21 @@ namespace AcademyReview.Services
             _context = new ApplicationDbContext();
             _userId = userId;
         }
-        public async Task<bool> CreateInstructorAsync(InstructorCreate model)
+        public bool CreateInstructor(InstructorCreate model)
         {
+            var ctx = new ApplicationDbContext();
+            var academyId = ctx.Academies.FirstOrDefault(a => a.Name == model.AcademyName).AcademyId;
+            var programId = ctx.Programs.FirstOrDefault(a => a.Name == model.ProgramName).ProgramId;
             Instructor entity = new Instructor
             {
                 FullName = model.FullName,
-                ProgramId = model.ProgramId,
-                AcademyId = model.AcademyId,
+                ProgramName = model.ProgramName,
+                ProgramId = programId,
+                AcademyName = model.AcademyName,
+                AcademyId = academyId
             };
             _context.Instructors.Add(entity);
-            var changeCount = await _context.SaveChangesAsync();
+            var changeCount = _context.SaveChanges();
 
             return changeCount == 1;
         }
@@ -36,33 +41,82 @@ namespace AcademyReview.Services
 
             var programList = entityList.Select(p => new InstructorListItem
             {
+                InstructorId = p.InstructorId,
                 FullName = p.FullName,
                 AverageRating = p.AverageRating
             }).ToList();
             return programList;
         }
-        public Instructor GetInstructorById(int id)
+        public InstructorEdit GetInstructorById(int id)
         {
-            var model = new Instructor();
+            var model = new InstructorEdit();
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Instructors.FirstOrDefault(a => a.InstructorId == id);
-                entity.FullName = model.FullName;
-                entity.ProgramId = model.ProgramId;
-                entity.AcademyId = model.AcademyId;
+                model.InstructorId = id;
+                model.FullName = entity.FullName;
+                model.ProgramId = entity.ProgramId;
+                model.ProgramName = entity.ProgramName;
+                model.AcademyId = entity.AcademyId;
+                model.AcademyName = entity.AcademyName;
             }
             return model;
         }
-        public bool UpdateInstructorById(InstructorEdit model)
+        public InstructorDetail GetInstructorByDetail(int id)
+        {
+            var model = new InstructorDetail();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Instructors.FirstOrDefault(i => i.InstructorId == id);
+                model.InstructorId = entity.InstructorId;
+                model.FullName = entity.FullName;
+                model.ProgramId = entity.ProgramId;
+                model.Program = entity.Program;
+                model.AcademyId = entity.AcademyId;
+                model.Academy = entity.Academy;
+                model.Ratings = entity.Ratings;
+            }
+            return model;
+        }
+        public InstructorEdit GetInstructorByName(string name)
+        {
+            var model = new InstructorEdit();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = _context.Instructors.FirstOrDefault(i => i.FullName == name);
+                model.FullName = entity.FullName;
+                model.ProgramId = entity.ProgramId;
+                model.AcademyId = entity.AcademyId;
+            }
+            return model;
+        }
+        public string GetAcademyNameById(int id)
+        {
+            var ctx = new ApplicationDbContext();
+            var entity = ctx.Academies.Find(id);
+            string academyName = entity.Name;
+
+            return academyName;
+        }
+        public string GetProgramNameById(int id)
+        {
+            var ctx = new ApplicationDbContext();
+            var entity = ctx.Programs.Find(id);
+            string programName = entity.Name;
+
+            return programName;
+        }
+        public bool UpdateInstructor(InstructorEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Instructors.Single(p => p.InstructorId == model.InstructorId);
+                var entity = ctx.Instructors.Single(p => p.FullName == model.FullName);
+                var academyId = ctx.Academies.Single(a => a.Name == model.AcademyName).AcademyId;
+                var programId = ctx.Programs.Single(a => a.Name == model.ProgramName).ProgramId;
 
-                entity.InstructorId = model.InstructorId;
                 entity.FullName = model.FullName;
-                entity.ProgramId = model.ProgramId;
-                entity.AcademyId = model.AcademyId;
+                entity.ProgramId = academyId;
+                entity.AcademyId = programId;
 
                 return ctx.SaveChanges() == 1;
             }

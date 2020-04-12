@@ -65,6 +65,18 @@
     <Compile Include="Migrations\202004101636229_AddedInstructorToDataLevel.Designer.cs">
       <DependentUpon>202004101636229_AddedInstructorToDataLevel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004110038595_AddedANameAndPNameToI.cs" />
+    <Compile Include="Migrations\202004110038595_AddedANameAndPNameToI.Designer.cs">
+      <DependentUpon>202004110038595_AddedANameAndPNameToI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004111802177_AddedViewRatingsToInstructor.cs" />
+    <Compile Include="Migrations\202004111802177_AddedViewRatingsToInstructor.Designer.cs">
+      <DependentUpon>202004111802177_AddedViewRatingsToInstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004112220344_AddedAcademyNamToProgram.cs" />
+    <Compile Include="Migrations\202004112220344_AddedAcademyNamToProgram.Designer.cs">
+      <DependentUpon>202004112220344_AddedAcademyNamToProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +92,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004101636229_AddedInstructorToDataLevel.resx">
       <DependentUpon>202004101636229_AddedInstructorToDataLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004110038595_AddedANameAndPNameToI.resx">
+      <DependentUpon>202004110038595_AddedANameAndPNameToI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004111802177_AddedViewRatingsToInstructor.resx">
+      <DependentUpon>202004111802177_AddedViewRatingsToInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004112220344_AddedAcademyNamToProgram.resx">
+      <DependentUpon>202004112220344_AddedAcademyNamToProgram.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

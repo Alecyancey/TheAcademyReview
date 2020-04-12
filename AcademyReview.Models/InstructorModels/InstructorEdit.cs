@@ -16,6 +16,10 @@ namespace AcademyReview.Models.InstructorModels
         [Required]
         public int AcademyId { get; set; }
         [Required]
+        public string AcademyName { get; set; }
+        [Required]
         public int ProgramId { get; set; }
+        [Required]
+        public string ProgramName { get; set; }
     }
 }

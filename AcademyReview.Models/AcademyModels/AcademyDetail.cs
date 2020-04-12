@@ -1,4 +1,5 @@
-﻿using AcademyReview.Models.ProgramModels;
+﻿using AcademyReview.Models.InstructorModels;
+using AcademyReview.Models.ProgramModels;
 using AcademyReview.Models.RatingModels.Academy;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ namespace AcademyReview.Models.AcademyModels
 
         public List<ProgramListItem> Programs { get; set; }
         public List<AcademyRatingListItem> Ratings { get; set; }
+        public List<InstructorListItem> Instructors { get; set; }
     }
 }

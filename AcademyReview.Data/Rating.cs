@@ -24,18 +24,20 @@ namespace AcademyReview.Data
         [ForeignKey(nameof(Academy))]
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
-
+        public string AcademyName { get; set; }
     }
     public class ProgramRating : Rating
     {
         [ForeignKey(nameof(Program))]
         public int ProgramId { get; set; }
         public virtual Program Program { get; set; }
+        public string ProgramName { get; set; }
     }
     public class InstructorRating : Rating
     {
         [ForeignKey(nameof(Instructor))]
         public int InstructorId { get; set; }
         public virtual Instructor Instructor { get; set; }
+        public string FullName { get; set; }
     }
 }

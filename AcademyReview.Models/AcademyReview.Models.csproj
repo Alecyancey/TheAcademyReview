@@ -59,6 +59,7 @@
     <Compile Include="AcademyModels\AcademyEdit.cs" />
     <Compile Include="AcademyModels\AcademyListItem.cs" />
     <Compile Include="InstructorModels\InstructorCreate.cs" />
+    <Compile Include="InstructorModels\InstructorDetail.cs" />
     <Compile Include="InstructorModels\InstructorEdit.cs" />
     <Compile Include="InstructorModels\InstructorListItem.cs" />
     <Compile Include="ProgramModels\ProgramCreate.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="RatingModels\Academy\AcademyRatingListItem.cs" />
     <Compile Include="RatingModels\Academy\AcademyRatingCreate.cs" />
     <Compile Include="RatingModels\Instructor\InstructorRatingCreate.cs" />
+    <Compile Include="RatingModels\Instructor\InstructorRatingListItem.cs" />
     <Compile Include="RatingModels\Program\ProgramRatingCreate.cs" />
     <Compile Include="RatingModels\RatingCreate.cs" />
     <Compile Include="RatingModels\RatingListItem.cs" />

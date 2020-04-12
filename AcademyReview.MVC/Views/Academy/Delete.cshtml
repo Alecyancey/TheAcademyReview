@@ -12,11 +12,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AcademyId)
+            @*@Html.DisplayNameFor(model => model.AcademyId)*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AcademyId)
+            @*@Html.DisplayFor(model => model.AcademyId)*@
+            @Html.HiddenFor(model => model.AcademyId)
         </dd>
 
         <dt>

@@ -15,6 +15,7 @@ namespace AcademyReview.Models.ProgramModels
         public string Prerequisite { get; set; }
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
+        public string AcademyName { get; set; }
         public virtual ICollection<ProgramRating> Ratings { get; set; }
     }
 }

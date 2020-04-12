@@ -1,5 +1,6 @@
 ﻿using AcademyReview.Data;
 using AcademyReview.Models.AcademyModels;
+using AcademyReview.Models.InstructorModels;
 using AcademyReview.Models.ProgramModels;
 using AcademyReview.Models.RatingModels.Academy;
 using System;
@@ -46,9 +47,70 @@ namespace AcademyReview.Services
                 AverageRating = a.AverageRating,
                 ProgramCount = a.Programs.Count
             }).ToList();
-            return academyList;
+            var sortedList = academyList.OrderBy(a => a.AverageRating).ToList();
+            sortedList.Reverse();
+            return sortedList;
         }
+        public AcademyDetail GetAcademyByDetail(int id)
+        {
+            var model = new AcademyDetail();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Academies.FirstOrDefault(i => i.AcademyId == id);
+                var programs = ctx.Programs.Where(p => p.AcademyId == id);
+                model.AcademyId = entity.AcademyId;
+                model.Name = entity.Name;
+                model.State = entity.State;
+                model.City = entity.City;
+                //model.Programs = entity.Programs;
+                //model.Instructors = entity.Instructors;
+                //model.Ratings = entity.Ratings;
+            }
+            return model;
+        }
+        public async Task<AcademyDetail> GetAcademyByDetailAsync(int id)
+        {
+            var entity = await _context.Academies.FindAsync(id);
+            if (entity == null)
+                return null;
 
+            var model = new AcademyDetail
+            {
+                AcademyId = entity.AcademyId,
+                Name = entity.Name,
+                City = entity.City,
+                State = entity.State,
+                Programs = entity.Programs.Select(program => new ProgramListItem
+                {
+                    ProgramId = program.ProgramId,
+                    Name = program.Name,
+                    Type = program.Type,
+                    AverageRating = program.AverageRating
+                }).ToList(),
+                Instructors = entity.Instructors.Select(i => new InstructorListItem
+                {
+                    InstructorId = i.InstructorId,
+                    FullName = i.FullName,
+                    AverageRating = i.AverageRating
+                }).ToList(),
+                Ratings = new List<AcademyRatingListItem>()
+            };
+
+            foreach (var rating in entity.Ratings)
+            {
+                model.Ratings.Add(new AcademyRatingListItem
+                {
+                    RatingId = rating.RatingId,
+                    AcademyId = entity.AcademyId,
+                    AcademyName = entity.Name,
+                    Description = rating.Description,
+                    IsUserOwned = rating.UserId == _userId,
+                    Score = rating.Score
+                    //VisitDate = rating.VisitDate
+                });
+            }
+            return model;
+        }
         //public async Task<AcademyDetail> GetAcademyByIdAsync(int academyId)
         //{
         //    var entity = await _context.Academies.FindAsync(academyId);

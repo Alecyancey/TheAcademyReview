@@ -29,6 +29,6 @@ namespace AcademyReview.Data
         }
         public virtual ICollection<Program> Programs { get; set; }
         public virtual ICollection<AcademyRating> Ratings { get; set; }
-
+        public virtual ICollection<Instructor> Instructors { get; set; }
     }
 }

@@ -12,10 +12,12 @@ namespace AcademyReview.Models.InstructorModels
         [Required]
         public string FullName { get; set; }
         [Required]
-        public int AcademyId { get; set; }
+        //public int AcademyId { get; set; }
+        public string AcademyName { get; set; }
         //AcademyName?
         [Required]
-        public int ProgramId { get; set; }
+        //public int ProgramId { get; set; }
+        public string ProgramName { get; set; }
         //ProgramName?
     }
 }

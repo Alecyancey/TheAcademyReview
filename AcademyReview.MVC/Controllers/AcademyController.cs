@@ -63,7 +63,16 @@ namespace AcademyReview.MVC.Controllers
             }
             return View(model);
         }
+        public ActionResult Ratings(int id)
+        {
+            var service = new RatingService(User.Identity.GetUserId());
+            var model = service.GetAnAcademyRatings(id);
+            //var modelList = new List<AcademyRatingListItem>();
 
+            //ViewBag.Name = model.
+
+            return View(model);
+        }
         //HttpGet 
         [HttpGet, Authorize]
         public ActionResult Edit(int id)
@@ -99,13 +108,29 @@ namespace AcademyReview.MVC.Controllers
             ModelState.AddModelError("", "Academy couldn't be updated.");
                 return View(model);
         }
-
+        //HttpGet Details
+        public async Task<ActionResult> Details(int id)
+        {
+            var service = GetAcademyService();
+            var syncModel = new AcademyDetail();
+            var model = await service.GetAcademyByDetailAsync(id);
+            {
+                syncModel.AcademyId = model.AcademyId;
+                syncModel.Name = model.Name;
+                syncModel.State = model.State;
+                syncModel.City = model.City;
+                syncModel.Programs = model.Programs.ToList();
+                syncModel.Instructors = model.Instructors;
+                syncModel.Ratings = model.Ratings;
+            }
+            return View(model);
+        }
         //HttpGet
         public ActionResult Delete(int id)
         {
             var service = GetAcademyService();
 
-            var model = service.GetAcademyById(id);
+            var model = service.GetAcademyByDetail(id);
 
             return View(model);
         }

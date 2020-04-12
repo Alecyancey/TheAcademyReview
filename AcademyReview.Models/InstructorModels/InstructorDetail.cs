@@ -1,30 +1,20 @@
-﻿using System;
+﻿using AcademyReview.Data;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AcademyReview.Data
+namespace AcademyReview.Models.InstructorModels
 {
-    public class Instructor
+    public class InstructorDetail
     {
-        [Key]
         public int InstructorId { get; set; }
-        [Required]
         public string FullName { get; set; }
-        //
-        [ForeignKey(nameof(Academy))]
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
-        public string AcademyName { get; set; }
-        //
-        [ForeignKey(nameof(Program))]
         public int ProgramId { get; set; }
         public virtual Program Program { get; set; }
-        public string ProgramName { get; set; }
-        //
         public double AverageRating
         {
             get

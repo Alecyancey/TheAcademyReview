@@ -12,5 +12,6 @@ namespace AcademyReview.Models.ProgramModels
         public int Score { get; set; }
         public string Description { get; set; }
         public bool IsUserOwned { get; set; }
+        public string UserId { get; set; }
     }
 }

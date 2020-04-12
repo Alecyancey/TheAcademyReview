@@ -12,5 +12,6 @@ namespace AcademyReview.Models.ProgramModels
         public string Type { get; set; }
         public string Prerequisite { get; set; }
         public int AcademyId { get; set; }
+        public string AcademyName { get; set; }
     }
 }

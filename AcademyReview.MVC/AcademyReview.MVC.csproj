@@ -173,6 +173,7 @@
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,14 +244,23 @@
     <Content Include="Views\Academy\Edit.cshtml" />
     <Content Include="Views\Academy\Delete.cshtml" />
     <Content Include="Views\Academy\Rate.cshtml" />
-    <Content Include="Views\Program\Create.cshtml" />
     <Content Include="Views\Program\Rate.cshtml" />
     <Content Include="Views\Program\Edit.cshtml" />
     <Content Include="Views\Program\Delete.cshtml" />
+    <Content Include="Views\Instructor\Create.cshtml" />
+    <Content Include="Views\Instructor\Index.cshtml" />
+    <Content Include="Views\Instructor\Delete.cshtml" />
+    <Content Include="Views\Instructor\Edit.cshtml" />
+    <Content Include="Views\Instructor\Details.cshtml" />
+    <Content Include="Views\Instructor\Rate.cshtml" />
+    <Content Include="Views\Academy\Details.cshtml" />
+    <Content Include="Views\Instructor\Ratings.cshtml" />
+    <Content Include="Views\Academy\Ratings.cshtml" />
+    <Content Include="Views\Program\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Instructor\" />
+    <Folder Include="Views\Rating\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

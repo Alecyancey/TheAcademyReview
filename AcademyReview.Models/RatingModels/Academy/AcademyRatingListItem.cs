@@ -9,10 +9,7 @@ namespace AcademyReview.Models.RatingModels.Academy
 {
     public class AcademyRatingListItem : RatingListItem
     {
-
         public int AcademyId { get; set; }
         public string AcademyName { get; set; }
-        public string AcademyRating { get; set; }
-
     } 
 }

@@ -18,19 +18,20 @@ namespace AcademyReview.Services
             _context = new ApplicationDbContext();
             _userId = userId;
         }
-        public async Task<bool> CreateProgramAsync(ProgramCreate model)
+        public bool CreateProgramAsync(ProgramCreate model)
         {
-            //var query = await _context.Academies.Select(a => a.Name == model.AcademyName).ToListAsync();
-            //int academyId = query.
-             Program entity = new Program
+            var ctx = new ApplicationDbContext();
+            int academyId = ctx.Academies.FirstOrDefault(a => a.Name == model.AcademyName).AcademyId;
+            Program entity = new Program
             {
                 Name = model.Name,
                 Type = model.Type,
                 Prerequisite = model.Prerequisite,
-                AcademyId = model.AcademyId
+                AcademyId = academyId,
+                AcademyName = model.AcademyName
             };
             _context.Programs.Add(entity);
-            var changeCount = await _context.SaveChangesAsync();
+            var changeCount = _context.SaveChanges();
 
             return changeCount == 1;
         }
@@ -42,11 +43,33 @@ namespace AcademyReview.Services
             {
                 ProgramId = p.ProgramId,
                 Name = p.Name,
+                AcademyName = p.AcademyName,
+                AcademyId = p.AcademyId,
                 Type = p.Type,
                 Prerequisite = p.Prerequisite,
                 AverageRating = p.AverageRating
             }).ToList();
             return programList;
+        }
+        public ProgramDetail GetProgramByDetail(int id)
+        {
+            var model = new ProgramDetail();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Programs.FirstOrDefault(i => i.AcademyId == id);
+                //var programs = ctx.Programs.Where(p => p.AcademyId == id);
+                model.ProgramId = entity.ProgramId;
+                model.Name = entity.Name;
+                model.Type = entity.Type;
+                model.Prerequisite = entity.Prerequisite;
+                model.AcademyId = entity.AcademyId;
+                model.AcademyName = entity.AcademyName;
+
+                //model.Programs = entity.Programs;
+                //model.Instructors = entity.Instructors;
+                //model.Ratings = entity.Ratings;
+            }
+            return model;
         }
         //GetProgramById
         public ProgramDetail GetProgramById(int id)
@@ -55,11 +78,11 @@ namespace AcademyReview.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Programs.FirstOrDefault(a => a.ProgramId == id);
-                entity.Name = model.Name;
-                entity.Type = model.Type;
-                entity.Prerequisite = model.Prerequisite;
-                entity.AcademyId = model.AcademyId;
-                entity.Academy = model.Academy;
+                model.Name = entity.Name;
+                model.Type = entity.Type;
+                model.Prerequisite = entity.Prerequisite;
+                model.AcademyId = entity.AcademyId;
+                model.AcademyName = entity.AcademyName;
             }
             return model;
         }
@@ -69,13 +92,15 @@ namespace AcademyReview.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Programs.Single(p => p.ProgramId == model.ProgramId);
+                int academyId = ctx.Academies.Single(a => a.Name == entity.AcademyName).AcademyId;
+
 
                 entity.ProgramId = model.ProgramId;
                 entity.Name = model.Name;
                 entity.Type = model.Type;
                 entity.Prerequisite = model.Prerequisite;
-                entity.AcademyId = model.AcademyId;
-                entity.Academy = model.Academy;
+                entity.AcademyId = academyId;
+                entity.AcademyName = model.AcademyName;
 
                 return ctx.SaveChanges() == 1;
             }

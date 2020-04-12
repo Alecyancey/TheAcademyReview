@@ -25,17 +25,17 @@ namespace AcademyReview.MVC.Controllers
             return View();
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProgramCreate model)
+        public ActionResult Create(ProgramCreate model)
         {
-            if (ModelState.IsValid)
+            var service = GetProgramService();
+            if(service.CreateProgramAsync(model))
             {
-                var service = GetProgramService();
-                if (await service.CreateProgramAsync(model))
-                {
-                    return RedirectToAction(nameof(Index));
-                }
+            return RedirectToAction(nameof(Index));
             }
+            else
+            {
             return View(model);
+            }
         }
         //HttpGet Rate(int id)
         [HttpGet, Authorize]
@@ -75,7 +75,7 @@ namespace AcademyReview.MVC.Controllers
                 Type = detail.Type,
                 Prerequisite = detail.Prerequisite,
                 AcademyId = detail.AcademyId,
-                Academy = detail.Academy
+                AcademyName = detail.AcademyName
             };
             return View(model);
         }

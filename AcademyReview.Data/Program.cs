@@ -18,6 +18,7 @@ namespace AcademyReview.Data
         [ForeignKey(nameof(Academy))]
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
+        public string AcademyName { get; set; }
         public double AverageRating
         {
             get
@@ -29,5 +30,6 @@ namespace AcademyReview.Data
             }
         }
         public virtual ICollection<ProgramRating> Ratings { get; set; }
+        
     }
 }
