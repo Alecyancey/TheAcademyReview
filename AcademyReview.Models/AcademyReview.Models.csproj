@@ -70,10 +70,13 @@
     <Compile Include="RatingModels\Academy\AcademyRatingCreate.cs" />
     <Compile Include="RatingModels\Instructor\InstructorRatingCreate.cs" />
     <Compile Include="RatingModels\Instructor\InstructorRatingListItem.cs" />
+    <Compile Include="RatingModels\Program\ProgramRatingListItem.cs" />
     <Compile Include="RatingModels\Program\ProgramRatingCreate.cs" />
     <Compile Include="RatingModels\RatingCreate.cs" />
     <Compile Include="RatingModels\RatingListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserModels\UserDetail.cs" />
+    <Compile Include="UserModels\UserEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

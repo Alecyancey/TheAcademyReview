@@ -6,9 +6,9 @@
 
 <h2>@ViewBag.Name Ratings</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <table class="table">
     <tr>
         @*<th>
@@ -20,9 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsUserOwned)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.IsUserOwned)
+            </th>*@
         @*<th>
                 @Html.DisplayNameFor(model => model.UserId)
             </th>*@
@@ -37,7 +37,6 @@
 
     @foreach (var item in Model)
     {
-        @ViewBag.Name = item.FullName;
         <tr>
             @Html.HiddenFor(modelItem => item.RatingId)
             @*<td>
@@ -49,26 +48,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUserOwned)
-            </td>
+            @Html.HiddenFor(modelItem => item.IsUserOwned)
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsUserOwned)
+                </td>*@
             @Html.HiddenFor(modelItem => item.UserId)
             @*<td>
                     @Html.DisplayFor(modelItem => item.UserId)
                 </td>*@
             @Html.HiddenFor(modelItem => item.InstructorId)
             @*<td>
-                @Html.DisplayFor(modelItem => item.InstructorId)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.InstructorId)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
     }
 
 </table>
+@Html.ActionLink("Back", "Index", "Instructor")

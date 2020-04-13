@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Academies</h2>
+<h2>Academy Rankings</h2>
 
 <p>
     @Html.ActionLink("Add Academy", "Create", "Academy")
@@ -63,10 +63,10 @@
         @Html.ActionLink("Details", "Details", new { id = item.AcademyId }) |
         @Html.ActionLink("View Ratings", "Ratings", new { id = item.AcademyId })
     </td>
-    <td>
+    @*<td>
         @Html.ActionLink("Edit", "Edit", new { id = item.AcademyId }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.AcademyId })
-    </td>
+    </td>*@
 </tr>
 }
 

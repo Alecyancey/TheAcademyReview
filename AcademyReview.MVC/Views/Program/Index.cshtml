@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Program Ratings</h2>
+<h2>Program Rankings</h2>
 
 <p>
     @Html.ActionLink("Add Program", "Create", "Program")
@@ -18,17 +18,17 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.AcademyId)
-        </th>*@
+                @Html.DisplayNameFor(model => model.AcademyId)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.AcademyName)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prerequisite)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prerequisite)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.AverageRating)
         </th>
@@ -44,12 +44,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-                @Html.HiddenFor(modelItem => item.AcademyId)
+            @Html.HiddenFor(modelItem => item.AcademyId)
             <td>
                 @Html.DisplayFor(modelItem => item.AcademyName)
             </td>
-                @Html.HiddenFor(modelItem => item.Type)
-                @Html.HiddenFor(modelItem => item.Prerequisite)
+            @Html.HiddenFor(modelItem => item.Type)
+            @Html.HiddenFor(modelItem => item.Prerequisite)
             <td>
                 @Html.DisplayFor(modelItem => item.AverageRating)
             </td>
@@ -58,10 +58,10 @@
                 @Html.ActionLink("Details", "Details", new { id = item.ProgramId }) |
                 @Html.ActionLink("View Ratings", "Ratings", new { id = item.ProgramId })
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProgramId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProgramId })
-            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProgramId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProgramId })
+                </td>*@
         </tr>
     }
 

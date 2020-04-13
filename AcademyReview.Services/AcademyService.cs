@@ -44,8 +44,8 @@ namespace AcademyReview.Services
                 Name = a.Name,
                 City = a.City,
                 State = a.State,
-                AverageRating = a.AverageRating,
-                ProgramCount = a.Programs.Count
+                ProgramCount = a.Programs.Count,
+                AverageRating = a.AverageRating
             }).ToList();
             var sortedList = academyList.OrderBy(a => a.AverageRating).ToList();
             sortedList.Reverse();
@@ -91,7 +91,6 @@ namespace AcademyReview.Services
                 {
                     InstructorId = i.InstructorId,
                     FullName = i.FullName,
-                    AverageRating = i.AverageRating
                 }).ToList(),
                 Ratings = new List<AcademyRatingListItem>()
             };

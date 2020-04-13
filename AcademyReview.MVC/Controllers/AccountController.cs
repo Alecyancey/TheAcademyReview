@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AcademyReview.MVC.Models;
 using AcademyReview.Data;
+using AcademyReview.Services;
+using AcademyReview.Models.UserModels;
 
 namespace AcademyReview.MVC.Controllers
 {
@@ -52,6 +54,49 @@ namespace AcademyReview.MVC.Controllers
                 _userManager = value;
             }
         }
+        public ActionResult Get()
+        {
+            UserService userService = CreateUserService();
+            var users = userService.GetUsers();
+            return View(users);
+        }
+
+        public ActionResult GetByUserName(string userName)
+        {
+            UserService userService = CreateUserService();
+            var user = userService.GetUserByUserName(userName);
+            return View(user);
+        }
+
+        public ActionResult Put(UserEdit modelEdit)
+        {
+            if (!ModelState.IsValid)
+                return View(modelEdit);
+
+            var service = CreateUserService();
+
+            if (!service.EditUser(modelEdit))
+                return View(modelEdit);
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Delete(string userName)
+        {
+            var service = CreateUserService();
+            if (!service.DeleteUser(userName))
+                return View();
+
+            return RedirectToAction("Index");
+        }
+
+        private UserService CreateUserService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var userService = new UserService(userId);
+            return userService;
+        }
 
         //
         // GET: /Account/Login
@@ -66,7 +111,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -109,7 +153,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -147,7 +190,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -157,13 +199,14 @@ namespace AcademyReview.MVC.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    await UserManager.AddToRoleAsync(user.Id, "user");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -198,7 +241,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -242,7 +284,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -276,7 +317,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
@@ -302,7 +342,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -352,7 +391,6 @@ namespace AcademyReview.MVC.Controllers
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
@@ -389,7 +427,6 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

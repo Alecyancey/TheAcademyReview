@@ -43,6 +43,10 @@ namespace AcademyReview.Services
             {
                 InstructorId = p.InstructorId,
                 FullName = p.FullName,
+                AcademyId = p.AcademyId,
+                AcademyName = p.AcademyName,
+                ProgramId = p.ProgramId,
+                ProgramName = p.ProgramName,
                 AverageRating = p.AverageRating
             }).ToList();
             return programList;
@@ -71,9 +75,9 @@ namespace AcademyReview.Services
                 model.InstructorId = entity.InstructorId;
                 model.FullName = entity.FullName;
                 model.ProgramId = entity.ProgramId;
-                model.Program = entity.Program;
+                model.ProgramName = entity.ProgramName;
                 model.AcademyId = entity.AcademyId;
-                model.Academy = entity.Academy;
+                model.AcademyName = entity.AcademyName;
                 model.Ratings = entity.Ratings;
             }
             return model;

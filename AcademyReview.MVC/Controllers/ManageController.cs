@@ -52,6 +52,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/Index
+        [HttpGet, Authorize (Roles = "Admin, User")]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -78,7 +79,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize (Roles = "Admin, User")]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
@@ -98,18 +99,17 @@ namespace AcademyReview.MVC.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
-
         //
         // GET: /Manage/AddPhoneNumber
+        [Authorize(Roles = "Admin, User")]
         public ActionResult AddPhoneNumber()
         {
             return View();
         }
-
         //
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -133,7 +133,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
@@ -148,7 +148,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
@@ -162,6 +162,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -172,7 +173,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -197,7 +198,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -215,6 +216,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [Authorize(Roles = "Admin, User")]
         public ActionResult ChangePassword()
         {
             return View();
@@ -223,7 +225,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -246,6 +248,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/SetPassword
+        [Authorize(Roles = "Admin, User")]
         public ActionResult SetPassword()
         {
             return View();
@@ -254,7 +257,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/SetPassword
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -278,6 +281,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/ManageLogins
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -302,7 +306,7 @@ namespace AcademyReview.MVC.Controllers
         //
         // POST: /Manage/LinkLogin
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
@@ -311,6 +315,7 @@ namespace AcademyReview.MVC.Controllers
 
         //
         // GET: /Manage/LinkLoginCallback
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());

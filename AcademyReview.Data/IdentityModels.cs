@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
@@ -18,6 +20,11 @@ namespace AcademyReview.Data
             // Add custom user claims here
             return userIdentity;
         }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
+        //ICollections??????????????????
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -20,11 +20,13 @@ namespace AcademyReview.MVC.Controllers
             return View(service.GetAllInstructors());
         }
         [HttpGet]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             return View();
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create(InstructorCreate model)
         {
             if (ModelState.IsValid)
@@ -38,7 +40,8 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet Rate(int id)
-        [HttpGet, Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetInstructorService();
@@ -48,7 +51,8 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Rate(ProgramRatingCreate model)
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Rate(InstructorRatingCreate model)
         {
             if (ModelState.IsValid)
@@ -61,6 +65,7 @@ namespace AcademyReview.MVC.Controllers
             }
             return View(model);
         }
+        [HttpGet, AllowAnonymous]
         public ActionResult Ratings(int id)
         {
             var service = new RatingService(User.Identity.GetUserId());
@@ -69,7 +74,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet Edit
-        [HttpGet, Authorize]
+        [HttpGet, Authorize (Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var service = GetInstructorService();
@@ -90,7 +95,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Edit
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "Admin")]
         public ActionResult Edit(InstructorEdit model)
         {
             if (!ModelState.IsValid)
@@ -108,6 +113,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet Details
+        [HttpGet, AllowAnonymous]
         public ActionResult Details(int id)
         {
             var service = GetInstructorService();
@@ -116,7 +122,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet Delete
-        [HttpGet]
+        [HttpGet, Authorize (Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var service = GetInstructorService();
@@ -126,7 +132,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Delete
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), Authorize (Roles = "Admin")]
         public ActionResult DeleteProgram(int id)
         {
             var service = GetInstructorService();

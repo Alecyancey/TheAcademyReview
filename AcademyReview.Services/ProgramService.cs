@@ -51,12 +51,12 @@ namespace AcademyReview.Services
             }).ToList();
             return programList;
         }
-        public ProgramDetail GetProgramByDetail(int id)
+        public ProgramDetail GetProgramByDetail(int id) 
         {
             var model = new ProgramDetail();
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Programs.FirstOrDefault(i => i.AcademyId == id);
+                var entity = ctx.Programs.FirstOrDefault(i => i.ProgramId == id);
                 //var programs = ctx.Programs.Where(p => p.AcademyId == id);
                 model.ProgramId = entity.ProgramId;
                 model.Name = entity.Name;

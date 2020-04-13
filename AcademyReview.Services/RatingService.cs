@@ -20,6 +20,22 @@ namespace AcademyReview.Services
             _context = new ApplicationDbContext();
             _userId = userId;
         }
+        public List<ProgramRatingListItem> GetAnProgramRatings(int id)
+        {
+            //var entityList = _context.InstructorRatings.ToList();
+            var programList = _context.ProgramRatings.Where(i => i.ProgramId == id);
+            var ratingList = programList.Select(p => new ProgramRatingListItem
+            {
+                ProgramId = p.ProgramId,
+                ProgramName = p.ProgramName,
+                RatingId = p.RatingId,
+                Score = p.Score,
+                Description = p.Description,
+                UserId = p.UserId,
+            }).ToList();
+
+            return ratingList;
+        }
         public List<InstructorRatingListItem> GetAnInstructorRatings(int id)
         {
             //var entityList = _context.InstructorRatings.ToList();

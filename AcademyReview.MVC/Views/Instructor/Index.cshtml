@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Instructors</h2>
+<h2>Instructor Rankings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Instructor", "Create")
 </p>
 <table class="table">
     <tr>
@@ -15,30 +15,41 @@
             @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AverageRating)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
             @Html.HiddenFor(modelItem => item.InstructorId)
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AverageRating)
-        </td>
-        <td>
-            @Html.ActionLink("Rate", "Rate", new { id = item.InstructorId }) |            
-            @Html.ActionLink("Details", "Details", new { id = item.InstructorId }) |
-            @Html.ActionLink("View Ratings", "Ratings", new { id = item.InstructorId})
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.InstructorId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.InstructorId })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageRating)
+            </td>
+            @Html.HiddenFor(modelItem => item.AcademyId)
+            @Html.HiddenFor(modelItem => item.ProgramId)
+            @Html.HiddenFor(modelItem => item.ProgramName)
+
+            <td>
+                @Html.ActionLink("Rate", "Rate", new { id = item.InstructorId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.InstructorId }) |
+                @Html.ActionLink("View Ratings", "Ratings", new { id = item.InstructorId })
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.InstructorId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.InstructorId })
+                </td>*@
+        </tr>
+    }
 
 </table>
