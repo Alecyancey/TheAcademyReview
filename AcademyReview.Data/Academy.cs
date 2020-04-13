@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace AcademyReview.Data
 {
+
+
+    ////////////////////      Fix naming and add User info to tables      ///////////////////////////
+
+
     public class Academy
     {
         [Key]

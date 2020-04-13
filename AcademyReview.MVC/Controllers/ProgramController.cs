@@ -14,31 +14,32 @@ namespace AcademyReview.MVC.Controllers
 {
     public class ProgramController : Controller
     {
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             var service = GetProgramService();
             return View(await service.GetAllProgramsAsync());
         }
-        [HttpGet]
+        [HttpGet, Authorize (Roles = "Admin, User")]
         public ActionResult Create()
         {
             return View();
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "User")]
         public ActionResult Create(ProgramCreate model)
         {
             var service = GetProgramService();
-            if(service.CreateProgramAsync(model))
+            if (service.CreateProgramAsync(model))
             {
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-            return View(model);
+                return View(model);
             }
         }
         //HttpGet Rate(int id)
-        [HttpGet, Authorize]
+        [HttpGet, Authorize (Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetProgramService();
@@ -48,7 +49,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Rate(ProgramRatingCreate model)
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "Admin, User")]
         public async Task<ActionResult> Rate(ProgramRatingCreate model)
         {
             if (ModelState.IsValid)
@@ -61,8 +62,16 @@ namespace AcademyReview.MVC.Controllers
             }
             return View(model);
         }
+        [HttpGet, AllowAnonymous]
+        public ActionResult Ratings(int id)
+        {
+            var service = new RatingService(User.Identity.GetUserId());
+            var model = service.GetAnProgramRatings(id);
+
+            return View(model);
+        }
         //HttpGet Edit
-        [HttpGet, Authorize]
+        [HttpGet, Authorize (Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var service = GetProgramService();
@@ -80,7 +89,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Edit
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost, Authorize(Roles = "Admin")]
         public ActionResult Edit(ProgramEdit model)
         {
             if (!ModelState.IsValid)
@@ -97,8 +106,16 @@ namespace AcademyReview.MVC.Controllers
             ModelState.AddModelError("", "Academy couldn't be updated.");
             return View(model);
         }
+        [HttpGet, AllowAnonymous]
+        public ActionResult Details(int id)
+        {
+            var service = GetProgramService();
+            var model = service.GetProgramByDetail(id);
+
+            return View(model);
+        }
         //HttpGet Delete
-        [HttpGet]
+        [HttpGet, Authorize (Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var service = GetProgramService();
@@ -108,7 +125,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Delete
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName ("Delete")]
         public ActionResult DeleteProgram(int id)
         {
             var service = GetProgramService();

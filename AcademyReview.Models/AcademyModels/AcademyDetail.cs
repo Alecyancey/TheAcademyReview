@@ -15,7 +15,16 @@ namespace AcademyReview.Models.AcademyModels
         public string Name { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public double AverageRating
+        {
+            get
+            {
+                if (Ratings != null && Ratings.Count != 0)
+                    return (double)Ratings.Sum(rating => rating.Score) / Ratings.Count;
 
+                return 0;
+            }
+        }
         public List<ProgramListItem> Programs { get; set; }
         public List<AcademyRatingListItem> Ratings { get; set; }
         public List<InstructorListItem> Instructors { get; set; }

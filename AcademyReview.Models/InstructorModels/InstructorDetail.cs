@@ -13,8 +13,10 @@ namespace AcademyReview.Models.InstructorModels
         public string FullName { get; set; }
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
+        public string AcademyName { get; set; }
         public int ProgramId { get; set; }
         public virtual Program Program { get; set; }
+        public string ProgramName { get; set; }
         public double AverageRating
         {
             get

@@ -19,13 +19,13 @@ namespace AcademyReview.MVC.Controllers
             var service = GetAcademyService();
             return View(await service.GetAllAcademiesAsync());
         }
-
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "Admin, User")]
         public async Task<ActionResult> Create(AcademyCreate model)
         {
             if (ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize (Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetAcademyService();
@@ -50,7 +50,7 @@ namespace AcademyReview.MVC.Controllers
         }
 
         //HttpPost
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "Admin, User")]
         public async Task<ActionResult> Rate(AcademyRatingCreate model)
         {
             if (ModelState.IsValid)
@@ -63,9 +63,11 @@ namespace AcademyReview.MVC.Controllers
             }
             return View(model);
         }
+        [HttpGet, AllowAnonymous]
         public ActionResult Ratings(int id)
         {
             var service = new RatingService(User.Identity.GetUserId());
+            @ViewBag.id = id;
             var model = service.GetAnAcademyRatings(id);
             //var modelList = new List<AcademyRatingListItem>();
 
@@ -74,7 +76,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize (Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var service = GetAcademyService();
@@ -91,7 +93,7 @@ namespace AcademyReview.MVC.Controllers
         }
 
         //HttpPost
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        [HttpPost, Authorize (Roles = "Admin")]
         public ActionResult Edit(AcademyEdit model)
         {
             if(!ModelState.IsValid)
@@ -109,6 +111,7 @@ namespace AcademyReview.MVC.Controllers
                 return View(model);
         }
         //HttpGet Details
+        [HttpGet, AllowAnonymous]
         public async Task<ActionResult> Details(int id)
         {
             var service = GetAcademyService();
@@ -126,6 +129,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var service = GetAcademyService();
@@ -134,7 +138,7 @@ namespace AcademyReview.MVC.Controllers
 
             return View(model);
         }
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), Authorize (Roles = "Admin")]
         public ActionResult DeleteAcademy(int id)
         {
             var service = GetAcademyService();

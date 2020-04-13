@@ -257,6 +257,8 @@
     <Content Include="Views\Instructor\Ratings.cshtml" />
     <Content Include="Views\Academy\Ratings.cshtml" />
     <Content Include="Views\Program\Create.cshtml" />
+    <Content Include="Views\Program\Details.cshtml" />
+    <Content Include="Views\Program\Ratings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -59,7 +59,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Back", "Details", new { id = Model.AcademyId }) |
 </div>
 
 @section Scripts {
