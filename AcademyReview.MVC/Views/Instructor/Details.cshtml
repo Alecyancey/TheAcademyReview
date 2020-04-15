@@ -12,12 +12,12 @@
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.InstructorId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.InstructorId)
-        </dt>
+                @Html.DisplayNameFor(model => model.InstructorId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.InstructorId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.InstructorId)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.FullName)
@@ -29,12 +29,12 @@
 
         @Html.HiddenFor(model => model.AcademyId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.AcademyId)
-        </dt>
+                @Html.DisplayNameFor(model => model.AcademyId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AcademyId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.AcademyId)
+            </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.AcademyName)
         </dt>
@@ -44,12 +44,12 @@
 
         @Html.HiddenFor(model => model.ProgramId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.ProgramId)
-        </dt>
+                @Html.DisplayNameFor(model => model.ProgramId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProgramId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.ProgramId)
+            </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.ProgramName)
         </dt>
@@ -64,11 +64,25 @@
         <dd>
             @Html.DisplayFor(model => model.AverageRating)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.InstructorId }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.InstructorId }) |
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.InstructorId })
+    }
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+
+        @Html.ActionLink("Delete", "Delete", new { id = Model.InstructorId })
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>

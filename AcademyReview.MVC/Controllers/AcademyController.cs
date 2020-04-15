@@ -26,12 +26,12 @@ namespace AcademyReview.MVC.Controllers
         }
 
         [HttpPost, Authorize (Roles = "Admin, User")]
-        public async Task<ActionResult> Create(AcademyCreate model)
+        public ActionResult Create(AcademyCreate model)
         {
             if (ModelState.IsValid)
             {
                 var service = GetAcademyService();
-                if (await service.CreateAcademyAsync(model))
+                if (service.CreateAcademy(model))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -51,12 +51,12 @@ namespace AcademyReview.MVC.Controllers
 
         //HttpPost
         [HttpPost, Authorize (Roles = "Admin, User")]
-        public async Task<ActionResult> Rate(AcademyRatingCreate model)
+        public ActionResult Rate(AcademyRatingCreate model)
         {
             if (ModelState.IsValid)
             {
                 var service = new RatingService(User.Identity.GetUserId());
-                if (await service.CreateAcademyRatingAsync(model))
+                if (service.CreateAcademyRating(model))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -112,20 +112,10 @@ namespace AcademyReview.MVC.Controllers
         }
         //HttpGet Details
         [HttpGet, AllowAnonymous]
-        public async Task<ActionResult> Details(int id)
+        public ActionResult Details(int id)
         {
             var service = GetAcademyService();
-            var syncModel = new AcademyDetail();
-            var model = await service.GetAcademyByDetailAsync(id);
-            {
-                syncModel.AcademyId = model.AcademyId;
-                syncModel.Name = model.Name;
-                syncModel.State = model.State;
-                syncModel.City = model.City;
-                syncModel.Programs = model.Programs.ToList();
-                syncModel.Instructors = model.Instructors;
-                syncModel.Ratings = model.Ratings;
-            }
+            var model = service.GetAcademyByDetail(id);
             return View(model);
         }
         //HttpGet

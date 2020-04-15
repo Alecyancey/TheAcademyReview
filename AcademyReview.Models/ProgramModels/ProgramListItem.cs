@@ -9,13 +9,15 @@ namespace AcademyReview.Models.ProgramModels
 {
     public class ProgramListItem
     {
-        [Display(Name ="")]
         public int ProgramId { get; set; }
+        [Display(Name = "Program Name")]
         public string Name { get; set; }
         public int AcademyId { get; set; }
+        [Display(Name = "Academy Name")]
         public string AcademyName { get; set; }
         public string Type { get; set; }
         public string Prerequisite { get; set; }
+        [Display(Name = "Average Rating")]
         public double AverageRating { get; set; }
 
         //public bool HasHeightRequirement

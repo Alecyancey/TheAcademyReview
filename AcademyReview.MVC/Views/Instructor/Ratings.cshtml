@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.IsUserOwned)
             </th>*@
@@ -29,9 +32,9 @@
         @*<th>
                 @Html.DisplayNameFor(model => model.InstructorId)
             </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>*@
         <th></th>
     </tr>
 
@@ -48,6 +51,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
             @Html.HiddenFor(modelItem => item.IsUserOwned)
             @*<td>
                     @Html.DisplayFor(modelItem => item.IsUserOwned)
@@ -60,13 +66,13 @@
             @*<td>
                     @Html.DisplayFor(modelItem => item.InstructorId)
                 </td>*@
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.FullName)
-            </td>
+            </td>*@
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
     }

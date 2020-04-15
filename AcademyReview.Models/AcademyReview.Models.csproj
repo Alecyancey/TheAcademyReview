@@ -58,6 +58,7 @@
     <Compile Include="AcademyModels\AcademyDetail.cs" />
     <Compile Include="AcademyModels\AcademyEdit.cs" />
     <Compile Include="AcademyModels\AcademyListItem.cs" />
+    <Compile Include="AcademyModels\AcademySearchItem.cs" />
     <Compile Include="InstructorModels\InstructorCreate.cs" />
     <Compile Include="InstructorModels\InstructorDetail.cs" />
     <Compile Include="InstructorModels\InstructorEdit.cs" />

@@ -9,7 +9,7 @@ namespace AcademyReview.Models.AcademyModels
 {
     public class AcademyCreate
     {
-        [Required]
+        [Required, Display(Name = "Academy Name")]
         public string Name { get; set; }
         [Required]
         public string City { get; set; }

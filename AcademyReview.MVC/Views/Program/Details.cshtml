@@ -59,11 +59,23 @@
         <dd>
             @Html.DisplayFor(model => model.AcademyName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramId }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.ProgramId }) |
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramId }) 
+}
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ProgramId }) 
+    }
     @Html.ActionLink("Back", "Index")
 </p>

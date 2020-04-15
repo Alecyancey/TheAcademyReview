@@ -15,10 +15,15 @@ namespace AcademyReview.Data
         public string Name { get; set; }
         public string Type { get; set; }
         public string Prerequisite { get; set; }
+        //
         [ForeignKey(nameof(Academy))]
         public int AcademyId { get; set; }
         public virtual Academy Academy { get; set; }
         public string AcademyName { get; set; }
+        //
+        public string OwnerId { get; set; }
+        public string CreatedBy { get; set; }
+        //
         public double AverageRating
         {
             get

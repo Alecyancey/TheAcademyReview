@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace AcademyReview.Models.AcademyModels
 {
-    public class AcademyEdit
-    {
-        [Required]
-        public int AcademyId { get; set; }
-        [Required, Display(Name = "Academy Name")]
+    public class AcademySearchItem
+    { //id, name, location, average rating
+        public int Id { get; set; }
+        [Display(Name = "Academy Name")]
         public string Name { get; set; }
-        [Required]
         public string City { get; set; }
-        [Required]
         public string State { get; set; }
+        [Display(Name = "Average Rating")]
+        public double AverageRating { get; set; }
     }
 }

@@ -31,7 +31,8 @@ namespace AcademyReview.Services
                 RatingId = p.RatingId,
                 Score = p.Score,
                 Description = p.Description,
-                UserId = p.UserId,
+                UserId = p.OwnerId,
+                CreatedBy = p.CreatedBy
             }).ToList();
 
             return ratingList;
@@ -48,7 +49,8 @@ namespace AcademyReview.Services
                 RatingId = p.RatingId,
                 Score = p.Score,
                 Description = p.Description,
-                UserId = p.UserId,
+                UserId = p.OwnerId,
+                CreatedBy = p.CreatedBy
             }).ToList();
             return programList;
         }
@@ -63,43 +65,52 @@ namespace AcademyReview.Services
                 RatingId = p.RatingId,
                 Score = p.Score,
                 Description = p.Description,
-                UserId = p.UserId,
+                UserId = p.OwnerId,
+                CreatedBy = p.CreatedBy
             }).ToList();
             
             return ratingList;
         }
-        public async Task<bool> CreateAcademyRatingAsync(AcademyRatingCreate model)
+        public bool CreateAcademyRating(AcademyRatingCreate model)
         {
+            var ctx = new ApplicationDbContext();
+            var createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
             var entity = new AcademyRating
             {
                 Description = model.Description,
                 AcademyId = model.AcademyId,
                 Score = model.Score,
-                UserId = _userId
+                OwnerId = _userId,
+                CreatedBy = createdBy
             };
 
             _context.Ratings.Add(entity);
-            var changeCount = await _context.SaveChangesAsync();
+            var changeCount = _context.SaveChanges();
 
             return changeCount == 1;
         }
-        public async Task<bool> CreateProgramRatingAsync(ProgramRatingCreate model)
+        public bool CreateProgramRating(ProgramRatingCreate model)
         {
+            var ctx = new ApplicationDbContext();
+            var createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
             var entity = new ProgramRating
             {
                 Description = model.Description,
                 ProgramId = model.ProgramId,
                 Score = model.Score,
-                UserId = _userId
+                OwnerId = _userId,
+                CreatedBy = createdBy
             };
 
             _context.Ratings.Add(entity);
-            var changeCount = await _context.SaveChangesAsync();
+            var changeCount = _context.SaveChanges();
 
             return changeCount == 1;
         }
         public bool CreateInstructorRating(InstructorRatingCreate model)
         {
+            var ctx = new ApplicationDbContext();
+            var createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
             var entity = new InstructorRating
             {
                 Description = model.Description,
@@ -109,10 +120,10 @@ namespace AcademyReview.Services
                 //ProgramId = model.ProgramId,
                 //AcademyId = model.AcademyId,
                 //AcademyName = model.AcademyName,
-                UserId = _userId
+                OwnerId = _userId,
+                CreatedBy = createdBy
             };
 
-            var ctx = new ApplicationDbContext();
             ctx.Ratings.Add(entity);
             return ctx.SaveChanges() == 1;
             //_context.Ratings.Add(entity);

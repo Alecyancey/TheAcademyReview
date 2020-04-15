@@ -11,15 +11,15 @@ namespace AcademyReview.Models.InstructorModels
     {
         [Required]
         public int InstructorId { get; set; }
-        [Required]
+        [Required, Display(Name = "Instructor Name")]
         public string FullName { get; set; }
         [Required]
         public int AcademyId { get; set; }
-        [Required]
+        [Required, Display(Name = "Academy Name")]
         public string AcademyName { get; set; }
         [Required]
         public int ProgramId { get; set; }
-        [Required]
+        [Required, Display(Name = "Program Name")]
         public string ProgramName { get; set; }
     }
 }
