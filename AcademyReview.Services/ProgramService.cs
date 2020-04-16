@@ -71,6 +71,7 @@ namespace AcademyReview.Services
                 model.AcademyId = entity.AcademyId;
                 model.AcademyName = entity.AcademyName;
                 model.CreatedBy = entity.CreatedBy;
+                model.Ratings = entity.Ratings;
 
                 //model.Programs = entity.Programs;
                 //model.Instructors = entity.Instructors;

@@ -54,9 +54,9 @@
         @Html.DisplayFor(modelItem => item.ProgramCount)
     </td>*@
     <td>
-        @Html.ActionLink("Rate", "Rate", new { id = item.AcademyId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.AcademyId }) |
-        @Html.ActionLink("View Ratings", "Ratings", new { id = item.AcademyId })
+       | @Html.ActionLink("Rate", "Rate", new { id = item.AcademyId }) |
+       | @Html.ActionLink("Details", "Details", new { id = item.AcademyId }) |
+       | @Html.ActionLink("View Ratings", "Ratings", new { id = item.AcademyId }) |
     </td>
     @*<td>
         @Html.ActionLink("Edit", "Edit", new { id = item.AcademyId }) |

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AcademyReview.Models.InstructorModels.InstructorListItem>
+
+<h2>Browsing Instructors</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateInstructor")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.HiddenFor(modelItem => item.InstructorId)
+            @Html.HiddenFor(modelItem => item.AcademyId)
+            @Html.HiddenFor(modelItem => item.ProgramId)
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageRating)
+            </td>
+            <td>
+               | @Html.ActionLink("Rate", "RateInstructor", new { id = item.InstructorId}) | 
+               | @Html.ActionLink("View Ratings", "InstructorRatings", new { id = item.InstructorId}) |
+               | @Html.ActionLink("Details", "InstructorDetails", new {  id=item.InstructorId }) |
+            </td>
+        </tr>
+    }
+
+
+</table>
+| @Html.ActionLink("Back", "Index") |

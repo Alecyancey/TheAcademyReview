@@ -21,6 +21,17 @@ namespace AcademyReview.Models.ProgramModels
         public virtual Academy Academy { get; set; }
         [Display(Name = "Academy Name")]
         public string AcademyName { get; set; }
+        [Display(Name = "Average Rating")]
+        public double AverageRating
+        {
+            get
+            {
+                if (Ratings != null && Ratings.Count != 0)
+                    return (double)Ratings.Sum(rating => rating.Score) / Ratings.Count;
+
+                return 0;
+            }
+        }
         public virtual ICollection<ProgramRating> Ratings { get; set; }
     }
 }

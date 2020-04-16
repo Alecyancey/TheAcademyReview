@@ -6,7 +6,7 @@
 
 <h2>SearchAcademies</h2>
 
-<form asp-controller="Rating" asp-action="SearchAcademies">
+<form asp-controller="Rating" asp-action="Academies">
     <p>
         Title: <input type="text" name="Id">
         <input type="submit" value="Filter" />
@@ -49,9 +49,6 @@
         </td>
         <td>
            | @Html.ActionLink("Details", "Details", "Academy", new { id = item.Id }, null) |
-          
-            
-              
           
         </td>
     </tr>

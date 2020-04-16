@@ -55,6 +55,27 @@ namespace AcademyReview.Services
             sortedList.Reverse();
             return sortedList;
         }
+
+        public AcademyDetail GetAcademyBrowser(int id)
+        {
+            var model = new AcademyDetail();
+            var ctx = new ApplicationDbContext();
+            using (ctx)
+            {
+                string createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
+                var entity = ctx.Academies.FirstOrDefault(i => i.AcademyId == id);
+                //var programs = ctx.Programs.Where(p => p.AcademyId == id);
+                model.AcademyId = entity.AcademyId;
+                model.Name = entity.Name;
+                model.State = entity.State;
+                model.City = entity.City;
+                model.CreatedBy = entity.CreatedBy;
+                model.Ratings = entity.Ratings;
+                //model.Programs = entity.Programs;
+                //model.Instructors = entity.Instructors;
+            }
+            return model;
+        }
         public AcademyDetail GetAcademyByDetail(int id)
         {
             var model = new AcademyDetail();
@@ -63,15 +84,15 @@ namespace AcademyReview.Services
             {
                 string createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
                 var entity = ctx.Academies.FirstOrDefault(i => i.AcademyId == id);
-                var programs = ctx.Programs.Where(p => p.AcademyId == id);
+                //var programs = ctx.Programs.Where(p => p.AcademyId == id);
                 model.AcademyId = entity.AcademyId;
                 model.Name = entity.Name;
                 model.State = entity.State;
                 model.City = entity.City;
                 model.CreatedBy = entity.CreatedBy;
+                model.Ratings = entity.Ratings;
                 //model.Programs = entity.Programs;
                 //model.Instructors = entity.Instructors;
-                //model.Ratings = entity.Ratings;
             }
             return model;
         }

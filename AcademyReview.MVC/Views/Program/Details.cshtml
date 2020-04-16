@@ -55,12 +55,19 @@
         <dt>
             @Html.DisplayNameFor(model => model.AcademyName)
         </dt>
-
+        @Html.HiddenFor(model => model.Ratings)
         <dd>
             @Html.DisplayFor(model => model.AcademyName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model=>model.CreatedBy)
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageRating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.CreatedBy)

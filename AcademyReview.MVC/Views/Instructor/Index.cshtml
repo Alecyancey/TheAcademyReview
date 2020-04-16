@@ -41,9 +41,9 @@
             @Html.HiddenFor(modelItem => item.ProgramName)
 
             <td>
-                @Html.ActionLink("Rate", "Rate", new { id = item.InstructorId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.InstructorId }) |
-                @Html.ActionLink("View Ratings", "Ratings", new { id = item.InstructorId })
+               | @Html.ActionLink("Rate", "Rate", new { id = item.InstructorId }) |
+               | @Html.ActionLink("Details", "Details", new { id = item.InstructorId }) |
+               | @Html.ActionLink("View Ratings", "Ratings", new { id = item.InstructorId }) |
             </td>
             @*<td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.InstructorId }) |

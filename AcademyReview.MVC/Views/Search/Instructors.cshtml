@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AcademyReview.Models.InstructorModels.InstructorSearchItem>
+
+@{
+    ViewBag.Title = "Instructors";
+}
+
+<h2>Instructors</h2>
+
+<form asp-controller="Rating" asp-action="Instructors">
+    <p>
+        Search: <input type="text" name="Id">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @Html.HiddenFor(modelItem => item.Id)
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AcademyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramName)
+        </td>
+        <td>
+           | @Html.ActionLink("Edit", "Edit", "Instructor", new { id=item.Id }, null) |
+           | @Html.ActionLink("Details", "Details", "Instructor", new { id = item.Id }, null) |
+           | @Html.ActionLink("Delete", "Delete", "Instructor", new { id=item.Id }, null) |
+        </td>
+    </tr>
+}
+
+</table>

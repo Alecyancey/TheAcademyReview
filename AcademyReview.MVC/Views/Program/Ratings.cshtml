@@ -63,15 +63,17 @@
                     @Html.DisplayFor(modelItem => item.ProgramId)
                 </td>*@
             @*<td>
-                @Html.DisplayFor(modelItem => item.ProgramName)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.ProgramName)
+                </td>*@
             @*<td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>*@
+            <td>| @Html.ActionLink("Edit", "EditRating", "Academy", new { id = item.RatingId }, null) |</td>
+
         </tr>
     }
 
 </table>
-@Html.ActionLink("Back", "Index") |
+| @Html.ActionLink("Back", "Index") |

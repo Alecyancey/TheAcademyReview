@@ -25,7 +25,7 @@ namespace AcademyReview.MVC.Controllers
             return View();
         }
 
-        [HttpPost, Authorize (Roles = "Admin, User")]
+        [HttpPost, Authorize(Roles = "Admin, User")]
         public ActionResult Create(AcademyCreate model)
         {
             if (ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
 
-        [HttpGet, Authorize (Roles = "Admin, User")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetAcademyService();
@@ -50,7 +50,7 @@ namespace AcademyReview.MVC.Controllers
         }
 
         //HttpPost
-        [HttpPost, Authorize (Roles = "Admin, User")]
+        [HttpPost, Authorize(Roles = "Admin, User")]
         public ActionResult Rate(AcademyRatingCreate model)
         {
             if (ModelState.IsValid)
@@ -73,6 +73,45 @@ namespace AcademyReview.MVC.Controllers
 
             //ViewBag.Name = model.
 
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult DeleteRating(int id)
+        {
+            var model = new AcademyRatingDelete { Id = id };
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult DeleteRating(AcademyRatingDelete model)
+        {
+            if(ModelState.IsValid)
+            {
+                var service = new BrowsingService(User.Identity.GetUserId());
+                if (service.DeleteRating(model.Id))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult EditRating(int id)
+        {
+            var model = new RatingEdit { Id = id };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditRating(RatingEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new RatingService(User.Identity.GetUserId());
+                if (service.UpdateRating(model))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
             return View(model);
         }
         //HttpGet 

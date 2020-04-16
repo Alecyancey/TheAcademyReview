@@ -1,6 +1,7 @@
 ﻿using AcademyReview.Data;
 using AcademyReview.Models.AcademyModels;
 using AcademyReview.Models.ProgramModels;
+using AcademyReview.Models.RatingModels.Academy;
 using AcademyReview.Models.RatingModels.Program;
 using AcademyReview.Services;
 using Microsoft.AspNet.Identity;
@@ -74,6 +75,26 @@ namespace AcademyReview.MVC.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public ActionResult EditRating(int id)
+        {
+            var model = new RatingEdit { Id = id };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditRating(RatingEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new RatingService(User.Identity.GetUserId());
+                if (service.UpdateRating(model))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(model);
+        }
+
         //HttpGet Edit
         [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)

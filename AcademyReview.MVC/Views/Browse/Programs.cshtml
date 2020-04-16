@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AcademyReview.Models.ProgramModels.ProgramListItem>
+
+<h2>Browsing Programs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateProgram")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @Html.HiddenFor(modelItem => item.ProgramId)
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AcademyName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AverageRating)
+    </td>
+    <td>
+       | @Html.ActionLink("Instructors", "Instructors", new { id = item.ProgramId }) |
+       | @Html.ActionLink("Rate", "RateProgram", new { id = item.ProgramId }) |
+       | @Html.ActionLink("View Ratings", "ProgramRatings", new { id = item.ProgramId }) |
+       | @Html.ActionLink("Details", "ProgramDetails", new { id=item.ProgramId }) |
+    </td>
+</tr>
+}
+
+</table>
+           | @Html.ActionLink("Back", "Index") |

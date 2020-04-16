@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AcademyReview.Models.AcademyModels.AcademySearchItem>
+
+
+<form asp-controller="Rating" asp-action="Academies2">
+    <p>
+        Title: <input type="text" name="Id">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+    @if(Model==null){
+        <div></div>
+    }
+    else
+    {
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </th>
+        <th></th>
+    </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Id)
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    | @Html.ActionLink("Details", "Details", "Academy", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+</table>
+    }

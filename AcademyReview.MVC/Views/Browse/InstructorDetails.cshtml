@@ -1,0 +1,68 @@
+﻿@model AcademyReview.Models.InstructorModels.InstructorDetail
+
+<div>
+    <h4>InstructorDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.InstructorId)
+        </dt>*@
+            @Html.HiddenFor(model => model.InstructorId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AcademyId)
+        </dt>*@
+            @Html.HiddenFor(model => model.AcademyId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcademyName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ProgramId)
+        </dt>*@
+            @Html.HiddenFor(model => model.ProgramId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageRating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   | @Html.ActionLink("Edit", "EditInstructor", new { id = Model.InstructorId}) |
+   | @Html.ActionLink("Back", "InstructorRatings", new { id = Model.ProgramId}) |
+   | @Html.ActionLink("Delete", "DeleteInstructorView", new { id = Model.InstructorId}) |
+</p>

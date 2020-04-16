@@ -131,6 +131,17 @@ namespace AcademyReview.Services
 
             //return changeCount == 1;
         }
+        public bool UpdateRating(RatingEdit model)
+        {
+            var ctx = new ApplicationDbContext();
+            var rating = ctx.Ratings.FirstOrDefault(r => r.RatingId == model.Id);
+            rating.RatingId = model.Id;
+            rating.Score = model.Score;
+            rating.Description = model.Description;
+
+            return ctx.SaveChanges() == 1;
+        }
+
         //public async Task<bool> CreateInstructorRatingAsync(InstructorRatingCreate model)
         //{
         //    var entity = new InstructorRating

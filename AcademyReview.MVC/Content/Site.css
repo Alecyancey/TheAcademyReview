@@ -1,15 +1,28 @@
 ﻿
 .navbar-inverse {
-    background-color:darkmagenta !important;
+    background-color: darkmagenta !important;
 }
+
 .navbar navbar-inverse {
     background-color: darkgreen;
     color: darkgreen;
 }
-    body {
-        padding-top: 50px;
-        padding-bottom: 20px;
-    }
+
+.navbar-default .navbar-nav > li > a {
+    color: white !important;
+}
+
+.navbar-default .navbar-text {
+    color: white !important;
+}
+#searchHeaders {
+
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {

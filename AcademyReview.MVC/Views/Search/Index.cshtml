@@ -3,8 +3,65 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Search</h2>
+<h1>Search</h1>
+<h2 id="searchHeaders">| @Html.ActionLink("Academies", "Academies", "Search") |</h2>
+<h2 id="searchHeaders">| @Html.ActionLink("Programs", "Programs", "Search") |</h2>
+<h2 id="searchHeaders">| @Html.ActionLink("Instructors", "Instructors", "Search") |</h2>
 
-<div>@Html.ActionLink("Academies", "Academies", "Search")</div>
-<div></div>
-<div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<button id="search">Search</button>
+
+<script>
+var url = '@Url.Action("DisplaySearchResults", "Search")';
+$('#search').click(function() {
+  var keyWord = $('#Keyword').val();
+  $('#searchResults').load(url, { searchText: keyWord });
+})
+</script>
+
+
+<form asp-controller="Rating" asp-action="Academies2">
+    <p>
+        Title: <input type="text" name="Id">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#first" aria-controls="first" role="tab" data-toggle="tab">First</a></li>
+        <li role="presentation"><a href="#second" aria-controls="second" role="tab" data-toggle="tab">Second</a></li>
+    </ul>
+
+    <div class="panel-body tab-content">
+        <div class="tab-pane active" id="first">
+            @Html.Partial("Academies2", )
+        </div>
+        <div class="tab-pane" id="second">
+            @Html.ActionLink("Programs", "Search")
+        </div>
+    </div>
+
+</div>*@

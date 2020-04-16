@@ -42,9 +42,20 @@
         <dd>
             @Html.DisplayFor(model => model.State)
         </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageRating)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.CreatedBy)
         </dt>
+
         <dd>
             @Html.DisplayFor(model => model.CreatedBy)
         </dd>
@@ -70,7 +81,7 @@
 <p>
     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.AcademyId })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AcademyId }) 
     }
     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
     {

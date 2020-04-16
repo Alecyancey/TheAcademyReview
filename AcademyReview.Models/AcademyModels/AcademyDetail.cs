@@ -1,4 +1,5 @@
-﻿using AcademyReview.Models.InstructorModels;
+﻿using AcademyReview.Data;
+using AcademyReview.Models.InstructorModels;
 using AcademyReview.Models.ProgramModels;
 using AcademyReview.Models.RatingModels.Academy;
 using System;
@@ -30,8 +31,8 @@ namespace AcademyReview.Models.AcademyModels
                 return 0;
             }
         }
-        public List<ProgramListItem> Programs { get; set; }
-        public List<AcademyRatingListItem> Ratings { get; set; }
-        public List<InstructorListItem> Instructors { get; set; }
+        public ICollection<Program> Programs { get; set; }
+        public ICollection<AcademyRating> Ratings { get; set; }
+        public ICollection<Instructor> Instructors { get; set; }
     }
 }
