@@ -1,5 +1,7 @@
-﻿using AcademyReview.Models.AcademyModels;
+﻿using AcademyReview.Data;
+using AcademyReview.Models.AcademyModels;
 using AcademyReview.Models.ProgramModels;
+using AcademyReview.Models.RatingModels.Academy;
 using AcademyReview.Models.RatingModels.Program;
 using AcademyReview.Services;
 using Microsoft.AspNet.Identity;
@@ -20,26 +22,29 @@ namespace AcademyReview.MVC.Controllers
             var service = GetProgramService();
             return View(await service.GetAllProgramsAsync());
         }
-        [HttpGet, Authorize (Roles = "Admin, User")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             return View();
         }
-        [HttpPost, Authorize (Roles = "User")]
+        [HttpPost, Authorize(Roles = "Admin, User")]
         public ActionResult Create(ProgramCreate model)
         {
+            var ctx = new ApplicationDbContext();
+            if (ctx.Academies.FirstOrDefault(a=>a.Name == model.AcademyName)==null)
+            {
+                ModelState.AddModelError("AcademyName", "Please create the academy first or enter an academy that already exists");
+                return View(model);
+            }
             var service = GetProgramService();
-            if (service.CreateProgramAsync(model))
+            if (service.CreateProgram(model))
             {
                 return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                return View(model);
-            }
+            return View(model);
         }
         //HttpGet Rate(int id)
-        [HttpGet, Authorize (Roles = "Admin, User")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetProgramService();
@@ -49,13 +54,13 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Rate(ProgramRatingCreate model)
-        [HttpPost, Authorize (Roles = "Admin, User")]
-        public async Task<ActionResult> Rate(ProgramRatingCreate model)
+        [HttpPost, Authorize(Roles = "Admin, User")]
+        public ActionResult Rate(ProgramRatingCreate model)
         {
             if (ModelState.IsValid)
             {
                 var service = new RatingService(User.Identity.GetUserId());
-                if (await service.CreateProgramRatingAsync(model))
+                if (service.CreateProgramRating(model))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -70,8 +75,28 @@ namespace AcademyReview.MVC.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public ActionResult EditRating(int id)
+        {
+            var model = new RatingEdit { Id = id };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditRating(RatingEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new RatingService(User.Identity.GetUserId());
+                if (service.UpdateRating(model))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(model);
+        }
+
         //HttpGet Edit
-        [HttpGet, Authorize (Roles = "Admin")]
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var service = GetProgramService();
@@ -115,7 +140,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpGet Delete
-        [HttpGet, Authorize (Roles = "Admin")]
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var service = GetProgramService();
@@ -125,7 +150,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
         //HttpPost Delete
-        [HttpPost, ActionName ("Delete")]
+        [HttpPost, ActionName("Delete")]
         public ActionResult DeleteProgram(int id)
         {
             var service = GetProgramService();

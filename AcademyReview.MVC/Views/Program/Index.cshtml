@@ -11,9 +11,9 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ProgramId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -37,10 +37,10 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
                 @Html.HiddenFor(modelItem => item.ProgramId)
-                @*@Html.DisplayFor(modelItem => item.ProgramId)*@
-            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ProgramId)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -54,9 +54,9 @@
                 @Html.DisplayFor(modelItem => item.AverageRating)
             </td>
             <td>
-                @Html.ActionLink("Rate", "Rate", new { id = item.ProgramId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProgramId }) |
-                @Html.ActionLink("View Ratings", "Ratings", new { id = item.ProgramId })
+                | @Html.ActionLink("Rate", "Rate", new { id = item.ProgramId }) |
+                | @Html.ActionLink("Details", "Details", new { id = item.ProgramId }) |
+                | @Html.ActionLink("View Ratings", "Ratings", new { id = item.ProgramId }) |
             </td>
             @*<td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ProgramId }) |

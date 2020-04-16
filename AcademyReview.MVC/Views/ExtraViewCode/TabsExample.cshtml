@@ -1,0 +1,29 @@
+﻿<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#first" aria-controls="first" role="tab" data-toggle="tab">First</a></li>
+        <li role="presentation"><a href="#second" aria-controls="second" role="tab" data-toggle="tab">Second</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="panel-body tab-content">
+        <div class="tab-pane active" id="first">
+            @Html.Partial("Academies2")
+        </div>
+        <div class="tab-pane" id="second">
+            @Html.ActionLink("Programs", "Search")
+        </div>
+    </div>
+
+</div>
+
+@*@model MyNamespace.FirstModel
+<div>
+    @using (Html.BeginForm("EditMyFirstModel", "MyController", FormMethod.Post,
+                                      new { enctype = "multipart/form-data" }))
+    {
+         Needed fields here 
+        <input class="btn btn-default" type="submit" value="Submit" />
+    }
+</div>*@

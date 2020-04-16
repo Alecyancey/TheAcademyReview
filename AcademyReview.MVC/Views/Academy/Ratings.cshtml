@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.IsUserOwned)
             </th>*@
@@ -47,6 +50,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
 
             @Html.HiddenFor(modelItem => item.IsUserOwned)
             @*<td>
@@ -73,6 +79,10 @@
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>*@
+            <td>
+               | @Html.ActionLink("Edit", "EditRating", "Academy", new { id = item.RatingId }, null) |
+               | @Html.ActionLink("Delete", "DeleteRating", "Academy", new { id = item.RatingId}, null) |
+            </td>
         </tr>
         @*<tr>
                 @Html.ActionLink("Add Rating", "Rate")
@@ -82,4 +92,4 @@
     }
 
 </table>
-@Html.ActionLink("Back", "Index")
+| @Html.ActionLink("Back", "Index") |

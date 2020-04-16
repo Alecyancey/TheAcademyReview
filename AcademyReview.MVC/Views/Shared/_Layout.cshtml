@@ -23,13 +23,33 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("Academy Rankings", "Index", "Academy")</li>
-                    <li>@Html.ActionLink("Program Rankings", "Index", "Program")</li>
-                    <li>@Html.ActionLink("Instructor Rankings", "Index", "Instructor")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    <li id="navtext">@Html.ActionLink("Browse", "Index", "Browse")</li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Rankings<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li id="navtext">@Html.ActionLink("Academy Rankings", "Index", "Academy")</li>
+                            <li id="navtext">@Html.ActionLink("Program Rankings", "Index", "Program")</li>
+                            <li id="navtext">@Html.ActionLink("Instructor Rankings", "Index", "Instructor")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Search<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li id="navtext">@Html.ActionLink("Search Academies", "Academies", "Search")</li>
+                            <li id="navtext">@Html.ActionLink("Search Programs", "Programs", "Search")</li>
+                            <li id="navtext">@Html.ActionLink("Search Instructors", "Instructors", "Search")</li>
+                        </ul>
+                    </li>
+
+                    @*<li id="navtext">@Html.ActionLink("Academy Rankings", "Index", "Academy")</li>
+        <li id="navtext">@Html.ActionLink("Program Rankings", "Index", "Program")</li>
+        <li id="navtext">@Html.ActionLink("Instructor Rankings", "Index", "Instructor")</li>*@
+                    @*<li id="navtext">@Html.ActionLink("Search", "Index", "Search")</li>*@
 
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial", new { style = "color: white" })
             </div>
         </div>
     </div>

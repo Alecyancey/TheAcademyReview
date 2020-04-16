@@ -1,0 +1,79 @@
+﻿<!-- Index.cshtml -->
+@{
+public class TestController : Controller
+{
+    //
+    // GET: /Test/
+
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult GetPartialview()
+    {
+        return PartialView("_demoPartial");
+    }
+
+}
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<h2>Partial Views - Demo</h2>
+
+<input id="btnLoad" type="button" value="click to register" />
+<br />
+
+<!-- partial view container -->
+<div id="divPartialViewContainer">
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#btnLoad').click(function () {
+
+            $.ajax({
+                url: '/Test/GetPartialview/',
+                type: 'POST',
+                contentType: 'application/html',
+                //data: JSON.stringify(model),
+                success: function (content) {
+                    $('#divPartialViewContainer').html(content);
+                },
+                error: function (e) { }
+            });
+        });
+
+    });
+
+</script>
+
+
+<!-- _demoPartial.cshtml -->
+
+<h4>
+    Register
+</h4>
+<label style="width: 100px">
+    User Name
+</label>
+<input type="text" />
+<br />
+<label style="width: 100px">
+    Email
+</label>
+<input type="text" />
+<br />
+<label style="width: 100px">
+    Password
+</label>
+<input type="text" />
+<br />
+<label style="width: 100px">
+    Confirm password
+</label>
+<input type="text" />
+<br />
+<input type="button" value="Register" />

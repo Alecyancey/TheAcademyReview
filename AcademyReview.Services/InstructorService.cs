@@ -22,13 +22,16 @@ namespace AcademyReview.Services
             var ctx = new ApplicationDbContext();
             var academyId = ctx.Academies.FirstOrDefault(a => a.Name == model.AcademyName).AcademyId;
             var programId = ctx.Programs.FirstOrDefault(a => a.Name == model.ProgramName).ProgramId;
+            string createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
             Instructor entity = new Instructor
             {
                 FullName = model.FullName,
                 ProgramName = model.ProgramName,
                 ProgramId = programId,
                 AcademyName = model.AcademyName,
-                AcademyId = academyId
+                AcademyId = academyId,
+                OwnerId = _userId,
+                CreatedBy = createdBy
             };
             _context.Instructors.Add(entity);
             var changeCount = _context.SaveChanges();
@@ -49,7 +52,9 @@ namespace AcademyReview.Services
                 ProgramName = p.ProgramName,
                 AverageRating = p.AverageRating
             }).ToList();
-            return programList;
+            var sortedList = programList.OrderBy(a => a.AverageRating).ToList();
+            sortedList.Reverse();
+            return sortedList;
         }
         public InstructorEdit GetInstructorById(int id)
         {
@@ -79,6 +84,7 @@ namespace AcademyReview.Services
                 model.AcademyId = entity.AcademyId;
                 model.AcademyName = entity.AcademyName;
                 model.Ratings = entity.Ratings;
+                model.CreatedBy = entity.CreatedBy;
             }
             return model;
         }

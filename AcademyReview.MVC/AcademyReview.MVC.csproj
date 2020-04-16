@@ -169,11 +169,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AcademyController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
-    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,10 +260,48 @@
     <Content Include="Views\Program\Create.cshtml" />
     <Content Include="Views\Program\Details.cshtml" />
     <Content Include="Views\Program\Ratings.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Academies.cshtml" />
+    <Content Include="Views\Search\Programs.cshtml" />
+    <Content Include="Views\Search\Instructors.cshtml" />
+    <Content Include="Views\Search\Academies2.cshtml" />
+    <Content Include="Views\ExtraViewCode\AjaxDynamics.cshtml" />
+    <Content Include="Views\ExtraViewCode\TabsExample.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Program\EditRating.cshtml" />
+    <Content Include="Views\Instructor\EditRating.cshtml" />
+    <Content Include="Views\Academy\EditRating.cshtml" />
+    <Content Include="Views\Browse\Index.cshtml" />
+    <Content Include="Views\Browse\Programs.cshtml" />
+    <Content Include="Views\Browse\Instructors.cshtml" />
+    <Content Include="Views\Browse\AcademyDetails.cshtml" />
+    <Content Include="Views\Browse\EditAcademy.cshtml" />
+    <Content Include="Views\Browse\DeleteAcademyView.cshtml" />
+    <Content Include="Views\Browse\RateAcademy.cshtml" />
+    <Content Include="Views\Browse\AcademyRatings.cshtml" />
+    <Content Include="Views\Browse\EditAcademyRating.cshtml" />
+    <Content Include="Views\Browse\ProgramDetails.cshtml" />
+    <Content Include="Views\Browse\EditProgram.cshtml" />
+    <Content Include="Views\Browse\DeleteProgramView.cshtml" />
+    <Content Include="Views\Browse\RateProgram.cshtml" />
+    <Content Include="Views\Browse\ProgramRatings.cshtml" />
+    <Content Include="Views\Browse\EditProgramRating.cshtml" />
+    <Content Include="Views\Browse\DeleteProgramRating.cshtml" />
+    <Content Include="Views\Browse\DeleteAcademyRating.cshtml" />
+    <Content Include="Views\Browse\CreateAcademy.cshtml" />
+    <Content Include="Views\Browse\CreateProgram.cshtml" />
+    <Content Include="Views\Browse\CreateInstructor.cshtml" />
+    <Content Include="Views\Browse\InstructorDetails.cshtml" />
+    <Content Include="Views\Browse\RateInstructor.cshtml" />
+    <Content Include="Views\Browse\InstructorRatings.cshtml" />
+    <Content Include="Views\Browse\EditInstructorRating.cshtml" />
+    <Content Include="Views\Browse\EditInstructor.cshtml" />
+    <Content Include="Views\Browse\DeleteInstructorView.cshtml" />
+    <Content Include="Views\Browse\DeleteInstructorRating.cshtml" />
+    <Content Include="Views\Academy\DeleteRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Rating\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

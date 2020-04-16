@@ -25,6 +25,9 @@ namespace AcademyReview.Data
         public virtual Program Program { get; set; }
         public string ProgramName { get; set; }
         //
+        public string OwnerId { get; set; }
+        public string CreatedBy { get; set; }
+        //
         public double AverageRating
         {
             get

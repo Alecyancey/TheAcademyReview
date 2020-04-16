@@ -81,6 +81,10 @@
     <Compile Include="Migrations\202004130052089_IntroducingUserRoles.Designer.cs">
       <DependentUpon>202004130052089_IntroducingUserRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004141612476_AddingUserNameToItems.cs" />
+    <Compile Include="Migrations\202004141612476_AddingUserNameToItems.Designer.cs">
+      <DependentUpon>202004141612476_AddingUserNameToItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004130052089_IntroducingUserRoles.resx">
       <DependentUpon>202004130052089_IntroducingUserRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004141612476_AddingUserNameToItems.resx">
+      <DependentUpon>202004141612476_AddingUserNameToItems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

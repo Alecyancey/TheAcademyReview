@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AcademyReview.Services
 {
@@ -18,21 +19,23 @@ namespace AcademyReview.Services
             _context = new ApplicationDbContext();
             _userId = userId;
         }
-        public bool CreateProgramAsync(ProgramCreate model)
+        public bool CreateProgram(ProgramCreate model)
         {
             var ctx = new ApplicationDbContext();
             int academyId = ctx.Academies.FirstOrDefault(a => a.Name == model.AcademyName).AcademyId;
+            string createdBy = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
             Program entity = new Program
             {
                 Name = model.Name,
                 Type = model.Type,
                 Prerequisite = model.Prerequisite,
                 AcademyId = academyId,
-                AcademyName = model.AcademyName
+                AcademyName = model.AcademyName,
+                OwnerId = _userId,
+                CreatedBy = createdBy
             };
             _context.Programs.Add(entity);
             var changeCount = _context.SaveChanges();
-
             return changeCount == 1;
         }
         public async Task<List<ProgramListItem>> GetAllProgramsAsync()
@@ -49,14 +52,17 @@ namespace AcademyReview.Services
                 Prerequisite = p.Prerequisite,
                 AverageRating = p.AverageRating
             }).ToList();
-            return programList;
+            var sortedList = programList.OrderBy(a => a.AverageRating).ToList();
+            sortedList.Reverse();
+            return sortedList;
         }
-        public ProgramDetail GetProgramByDetail(int id) 
+        public ProgramDetail GetProgramByDetail(int id)
         {
             var model = new ProgramDetail();
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Programs.FirstOrDefault(i => i.ProgramId == id);
+                var userName = ctx.Users.FirstOrDefault(u => u.Id == _userId).UserName;
                 //var programs = ctx.Programs.Where(p => p.AcademyId == id);
                 model.ProgramId = entity.ProgramId;
                 model.Name = entity.Name;
@@ -64,6 +70,8 @@ namespace AcademyReview.Services
                 model.Prerequisite = entity.Prerequisite;
                 model.AcademyId = entity.AcademyId;
                 model.AcademyName = entity.AcademyName;
+                model.CreatedBy = entity.CreatedBy;
+                model.Ratings = entity.Ratings;
 
                 //model.Programs = entity.Programs;
                 //model.Instructors = entity.Instructors;
@@ -86,6 +94,23 @@ namespace AcademyReview.Services
             }
             return model;
         }
+        //GetAcademiesForDropdown
+        //public IEnumerable<SelectListItem> GetAcademiesForDropdown()
+        //{
+        //    var ctx = new ApplicationDbContext();
+        //    List<SelectListItem> regions = new List<SelectListItem>();
+
+        //    foreach (var academy in ctx.Academies)
+        //    {
+        //        new SelectListItem
+        //        {
+        //            Value = academy.AcademyId.ToString(),
+        //            Text = academy.Name.ToString()
+        //        };
+        //    }
+
+        //    return regions;
+        //}
         //UpdateProgram
         public bool UpdateProgramByIdAsync(ProgramEdit model)
         {

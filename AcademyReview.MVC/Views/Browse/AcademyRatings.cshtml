@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AcademyReview.Models.RatingModels.Academy.AcademyRatingListItem>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+            @Html.HiddenFor(modelItem => item.RatingId)
+            @Html.HiddenFor(modelItem => item.IsUserOwned)
+            @Html.HiddenFor(modelItem => item.UserId)
+            @Html.HiddenFor(modelItem => item.AcademyId)
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AcademyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            | @Html.ActionLink("Edit", "EditAcademyRating", new {  id=item.RatingId}) |
+            | @Html.ActionLink("Delete", "DeleteAcademyRating", new {  id=item.RatingId }) |
+        </td>
+    </tr>
+}
+
+</table>
+| @Html.ActionLink("Back", "Index") |

@@ -25,13 +25,13 @@ namespace AcademyReview.MVC.Controllers
             return View();
         }
 
-        [HttpPost, Authorize (Roles = "Admin, User")]
-        public async Task<ActionResult> Create(AcademyCreate model)
+        [HttpPost, Authorize(Roles = "Admin, User")]
+        public ActionResult Create(AcademyCreate model)
         {
             if (ModelState.IsValid)
             {
                 var service = GetAcademyService();
-                if (await service.CreateAcademyAsync(model))
+                if (service.CreateAcademy(model))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -39,7 +39,7 @@ namespace AcademyReview.MVC.Controllers
             return View(model);
         }
 
-        [HttpGet, Authorize (Roles = "Admin, User")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public ActionResult Rate(int id)
         {
             var service = GetAcademyService();
@@ -50,13 +50,13 @@ namespace AcademyReview.MVC.Controllers
         }
 
         //HttpPost
-        [HttpPost, Authorize (Roles = "Admin, User")]
-        public async Task<ActionResult> Rate(AcademyRatingCreate model)
+        [HttpPost, Authorize(Roles = "Admin, User")]
+        public ActionResult Rate(AcademyRatingCreate model)
         {
             if (ModelState.IsValid)
             {
                 var service = new RatingService(User.Identity.GetUserId());
-                if (await service.CreateAcademyRatingAsync(model))
+                if (service.CreateAcademyRating(model))
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -73,6 +73,45 @@ namespace AcademyReview.MVC.Controllers
 
             //ViewBag.Name = model.
 
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult DeleteRating(int id)
+        {
+            var model = new AcademyRatingDelete { Id = id };
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult DeleteRating(AcademyRatingDelete model)
+        {
+            if(ModelState.IsValid)
+            {
+                var service = new BrowsingService(User.Identity.GetUserId());
+                if (service.DeleteRating(model.Id))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult EditRating(int id)
+        {
+            var model = new RatingEdit { Id = id };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditRating(RatingEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new RatingService(User.Identity.GetUserId());
+                if (service.UpdateRating(model))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
             return View(model);
         }
         //HttpGet 
@@ -112,20 +151,10 @@ namespace AcademyReview.MVC.Controllers
         }
         //HttpGet Details
         [HttpGet, AllowAnonymous]
-        public async Task<ActionResult> Details(int id)
+        public ActionResult Details(int id)
         {
             var service = GetAcademyService();
-            var syncModel = new AcademyDetail();
-            var model = await service.GetAcademyByDetailAsync(id);
-            {
-                syncModel.AcademyId = model.AcademyId;
-                syncModel.Name = model.Name;
-                syncModel.State = model.State;
-                syncModel.City = model.City;
-                syncModel.Programs = model.Programs.ToList();
-                syncModel.Instructors = model.Instructors;
-                syncModel.Ratings = model.Ratings;
-            }
+            var model = service.GetAcademyByDetail(id);
             return View(model);
         }
         //HttpGet

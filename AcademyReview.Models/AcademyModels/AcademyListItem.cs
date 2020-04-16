@@ -12,6 +12,7 @@ namespace AcademyReview.Models.AcademyModels
     {
         [Display(Name = "")]
         public int AcademyId { get; set; }
+        [Display(Name = "Academy Name")]
         public string Name { get; set; }
         public string City { get; set; }
         public string State { get; set; }

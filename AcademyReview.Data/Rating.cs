@@ -13,11 +13,10 @@ namespace AcademyReview.Data
         [Key]
         public int RatingId { get; set; }
         [Required, Range(1, 5)]
-        public int Score { get; set; }
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public int Score { get; set; } 
         public string Description { get; set; }
+        public string OwnerId { get; set; }
+        public string CreatedBy { get; set; }
     }
     public class AcademyRating : Rating 
     {

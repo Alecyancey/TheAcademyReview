@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AcademyReview.Models.AcademyModels.AcademyListItem>
+
+<h2>Browsing Academies</h2>
+<p>
+    @Html.ActionLink("Create New", "CreateAcademy")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageRating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+            @Html.HiddenFor(modelItem => item.AcademyId)
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageRating)
+        </td>
+        <td>
+           | @Html.ActionLink("Programs", "Programs", new {  id = item.AcademyId}) |
+           | @Html.ActionLink("Rate", "RateAcademy", new { id = item.AcademyId}) |
+           | @Html.ActionLink("View Ratings", "AcademyRatings", new { id = item.AcademyId}) |
+           | @Html.ActionLink("Details", "AcademyDetails", new { id=item.AcademyId }) |
+        </td>
+    </tr>
+}
+
+</table>

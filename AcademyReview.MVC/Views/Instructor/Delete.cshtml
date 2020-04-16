@@ -13,12 +13,12 @@
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.InstructorId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.InstructorId)
-        </dt>
+                @Html.DisplayNameFor(model => model.InstructorId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.InstructorId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.InstructorId)
+            </dd>*@
 
 
         <dt>
@@ -32,28 +32,29 @@
 
         @Html.HiddenFor(model => model.AcademyId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.AcademyId)
-        </dt>
+                @Html.DisplayNameFor(model => model.AcademyId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AcademyId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.AcademyId)
+            </dd>*@
 
 
         @Html.HiddenFor(model => model.ProgramId)
         @*<dt>
-            @Html.DisplayNameFor(model => model.ProgramId)
-        </dt>
+                @Html.DisplayNameFor(model => model.ProgramId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProgramId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.ProgramId)
+            </dd>*@
 
 
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -61,5 +62,5 @@
         </div>
     }
 </div>
-            @Html.ActionLink("Back", "Index")} |
+           | @Html.ActionLink("Back", "Index") |
 
